@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=9" >
+
+<title>GettingAndCleaningDataProject</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+
+
+
+
+</head>
+
+<body>
+<h1>GettingAndCleaningDataProject</h1>
+
+<p>Solution to the couse project by Juan M Garcia-Gomez (email: <a href="mailto:yossua54@gmail.com">yossua54@gmail.com</a>)</p>
+
+<h2>Author: Juan M Garcia-Gomez (<a href="mailto:yossua54@gmail.com">yossua54@gmail.com</a>)</h2>
+
+<p>#0. reading the dataset</p>
+
+<p>#read names of the features (features.txt)
+featuresdf &lt;- read.table(&ldquo;./UCI HAR Dataset/features.txt&rdquo;,  header=FALSE) #similar a read.csv(), usar quote=&ldquo;&rdquo;
+featuresX &lt;- featuresdf[,2] </p>
+
+<h1>read input data files</h1>
+
+<p>X_train &lt;- read.table(&ldquo;./UCI HAR Dataset/train/X_train.txt&rdquo;,  header=FALSE) #similar a read.csv(), usar quote=&ldquo;&rdquo;
+names(X_train) &lt;- featuresX
+y_train &lt;- read.table(&ldquo;./UCI HAR Dataset/train/y_train.txt&rdquo;, header=FALSE) #similar a read.csv(), usar quote=&ldquo;&rdquo;
+names(y_train) &lt;- &ldquo;activity&rdquo;
+subject_train &lt;- read.table(&ldquo;./UCI HAR Dataset/train/subject_train.txt&rdquo;,  header=FALSE) #similar a read.csv(), usar quote=&ldquo;&rdquo;
+names(subject_train) &lt;- &ldquo;subject&rdquo;
+X_test &lt;- read.table(&ldquo;./UCI HAR Dataset/test/X_test.txt&rdquo;,  header=FALSE) #similar a read.csv(), usar quote=&ldquo;&rdquo;
+names(X_test) &lt;- featuresX
+y_test &lt;- read.table(&ldquo;./UCI HAR Dataset/test/y_test.txt&rdquo;,  header=FALSE) #similar a read.csv(), usar quote=&ldquo;&rdquo;
+names(y_test) &lt;- &ldquo;activity&rdquo;
+subject_test &lt;- read.table(&ldquo;./UCI HAR Dataset/test/subject_test.txt&rdquo;, header=FALSE) #similar a read.csv(), usar quote=&ldquo;&rdquo;
+names(subject_test) &lt;- &ldquo;subject&rdquo;</p>
+
+<h1>1. Merges the training and the test sets to create one data set.</h1>
+
+<p>#merging training files
+training &lt;- cbind(subject_train,X_train,y_train)
+#merging training files
+test &lt;- cbind(subject_test,X_test,y_test)
+#merging training and test dataframes
+tidydata_all &lt;- rbind(training,test)
+head(tidydata_all)
+tail(tidydata_all)
+#write.table(tidydata_all,file=&ldquo;tidydata_all.txt&rdquo;)</p>
+
+<p>#2. Extracts only the measurements on the mean and standard deviation for each measurement. </p>
+
+<p>imean &lt;- grep(&ldquo;mean()&rdquo;,names(tidydata_all),fixed=TRUE)
+istd &lt;- grep(&ldquo;std()&rdquo;,names(tidydata_all),fixed=TRUE)
+imeanstd &lt;- c(imean,istd)
+iimeanstd &lt;- imeanstd[order(imeanstd)]
+features_meanstd &lt;- names(tidydata_all)[iimeanstd]
+tidydata_meanstd &lt;- tidydata_all[,iimeanstd]
+head(tidydata_meanstd)
+#write.table(tidydata_meanstd,file=&ldquo;tidydata_meanstd.txt&rdquo;)</p>
+
+<p>#3. Uses descriptive activity names to name the activities in the data set</p>
+
+<p>activitylabelsdf &lt;- read.table(&ldquo;./UCI HAR Dataset/activity_labels.txt&rdquo;,  header=FALSE) #similar a read.csv(), usar quote=&ldquo;&rdquo;
+activity_labels &lt;- activitylabelsdf[,2] 
+tidydata_all[,563] &lt;- activity_labels[tidydata_all[,563]] 
+head(tidydata_all) #checking the result
+tidydata_all[27:28,] #checking the result, activities 5,4 </p>
+
+<p>#4. Appropriately labels the data set with descriptive variable names. </p>
+
+<p>namesTidy &lt;- gsub(&ldquo;<sup>t&rdquo;,&ldquo;time&rdquo;,names(tidydata_meanstd))</sup>
+namesTidy &lt;- gsub(&ldquo;<sup>f&rdquo;,&ldquo;frequency&rdquo;,namesTidy)</sup>
+namesTidy &lt;- gsub(&ldquo;-&rdquo;,&ldquo;.&rdquo;,namesTidy)
+namesTidy &lt;- gsub(&ldquo;()&rdquo;,&ldquo;&rdquo;,namesTidy,fixed=TRUE)
+namesTidy &lt;- gsub(&ldquo;bodybody&rdquo;,&ldquo;body&rdquo;,namesTidy)
+namesTidy
+names(tidydata_meanstd) &lt;- namesTidy</p>
+
+<p>#5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject. </p>
+
+<p>#an index of subject x activity (30 x 6 levels) is created for the 10299 observations</p>
+
+<p>#the tidydata_meanstd data frame is splitted in the 180 levels</p>
+
+<p>#the average is calculated of each  variable for each activity and each subject by applying colMeans for each data frame of the pieces list</p>
+
+<p>#the tidy dataset is written
+#the variable names and observation names are also saved in files to write the Code Book</p>
+
+</body>
+
+</html>
+
