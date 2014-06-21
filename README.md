@@ -114,3 +114,12 @@ An accumulative procedure is follow over the namesTidy auxiliary variable:
   > write.table(names(tidy_meanstd_averageBySubjectAndActivity),file="tidy_meanstd_averageBySubjectAndActivity_features.txt",col.names = FALSE)
   
   > write.table(rownames(tidy_meanstd_averageBySubjectAndActivity),file="tidy_meanstd_averageBySubjectAndActivity_observations.txt",col.names = FALSE)
+  
+# Result
+
+The result obtained by the [run_analysis.R](https://github.com/yossua54/GettingAndCleaningDataProject/blob/master/run_analysis.R) script is a tidy dataset composed by 180 observations and 66 variables with the average of each variable for each activity and each subject. The result is saved in the [tidy_meanstd_averageBySubjectAndActivity.txt](https://github.com/yossua54/GettingAndCleaningDataProject/blob/master/tidy_meanstd_averageBySubjectAndActivity.txt) space-separated text file.
+
+# Conclusions
+
+The result obtained in the project shows how to read, clean and summarize data in R to generate tidy datasets.
+
