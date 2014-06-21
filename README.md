@@ -55,19 +55,20 @@ Next, a detailed explanation of the actions is reported:
 > istd <- grep("std()",names(tidydata_all),fixed=TRUE)
 
 * After merging and ordering the indexes, a new tidydata_meanstd dataframe is created with only mean and std measurements.
-
-> imeanstd <- c(imean,istd)
-> iimeanstd <- imeanstd[order(imeanstd)]
-> features_meanstd <- names(tidydata_all)[iimeanstd]
-> tidydata_meanstd <- tidydata_all[,iimeanstd]
-> head(tidydata_meanstd)
+  imeanstd <- c(imean,istd)
+  iimeanstd <- imeanstd[order(imeanstd)]
+  features_meanstd <- names(tidydata_all)[iimeanstd]
+  tidydata_meanstd <- tidydata_all[,iimeanstd]
+  head(tidydata_meanstd)
 
 ### 3. Uses descriptive activity names to name the activities in the data set
 
 * Activity labels from the activity_labels.txt are used to rename the values of the activity column
 
 > activitylabelsdf <- read.table("./UCI HAR Dataset/activity_labels.txt",  header=FALSE)
+
 > activity_labels <- activitylabelsdf[,2] 
+
 > tidydata_all[,563] <- activity_labels[tidydata_all[,563]] 
 
 ### 4. Appropriately labels the data set with descriptive variable names. 
