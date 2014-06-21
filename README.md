@@ -112,4 +112,5 @@ An accumulative procedure is follow over the namesTidy auxiliary variable:
 
 * Additionally, the variable names and observation names are saved in files to write the Code Book
   > write.table(names(tidy_meanstd_averageBySubjectAndActivity),file="tidy_meanstd_averageBySubjectAndActivity_features.txt",col.names = FALSE)
+  
   > write.table(rownames(tidy_meanstd_averageBySubjectAndActivity),file="tidy_meanstd_averageBySubjectAndActivity_observations.txt",col.names = FALSE)
