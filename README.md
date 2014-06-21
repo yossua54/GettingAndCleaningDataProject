@@ -56,10 +56,10 @@ Next, a detailed explanation of the actions is reported:
 
 * After merging and ordering the indexes, a new tidydata_meanstd dataframe is created with only mean and std measurements.
 
-  imeanstd <- c(imean,istd)
-  iimeanstd <- imeanstd[order(imeanstd)]
-  features_meanstd <- names(tidydata_all)[iimeanstd]
-  tidydata_meanstd <- tidydata_all[,iimeanstd]
+  > imeanstd <- c(imean,istd)
+  > iimeanstd <- imeanstd[order(imeanstd)]
+  > features_meanstd <- names(tidydata_all)[iimeanstd]
+  > tidydata_meanstd <- tidydata_all[,iimeanstd]
   head(tidydata_meanstd)
 
 ### 3. Uses descriptive activity names to name the activities in the data set
