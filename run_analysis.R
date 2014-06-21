@@ -57,7 +57,7 @@ namesTidy <- gsub("^t","time",names(tidydata_meanstd))
 namesTidy <- gsub("^f","frequency",namesTidy)
 namesTidy <- gsub("-",".",namesTidy)
 namesTidy <- gsub("()","",namesTidy,fixed=TRUE)
-namesTidy <- gsub("bodybody","body",namesTidy)
+namesTidy <- gsub("BodyBody","Body",namesTidy)
 namesTidy
 names(tidydata_meanstd) <- namesTidy
 

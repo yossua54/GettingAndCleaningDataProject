@@ -91,7 +91,7 @@ An accumulative procedure is follow over the namesTidy auxiliary variable:
 > namesTidy <- gsub("()","",namesTidy,fixed=TRUE)
 
 * double body is corrected from the feature names 
-> namesTidy <- gsub("bodybody","body",namesTidy)
+> namesTidy <- gsub("BodyBody","Body",namesTidy)
 
 * The feature names of the tidydata_meanstd dataframe is substituted by the auxilary variable with the corrected names
 > names(tidydata_meanstd) <- namesTidy
