@@ -5,6 +5,25 @@ Solution to the couse project by Juan M Garcia-Gomez (email: yossua54@gmail.com)
 
 ## Author: Juan M Garcia-Gomez (yossua54@gmail.com)
 
+# Objective
+
+The objective of this project is to provide generate a tidy dataset with summarized data collected from the accelerometers from the Samsung Galaxy S smartphone.
+
+# Materials
+
+The data processed in this project is the "Human Activity Recognition Using Smartphones Data Set " downloaded from this [https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip] URL
+
+# Methids
+
+ You should create one R script called run_analysis.R that does the following. 
+
+    Merges the training and the test sets to create one data set.
+    Extracts only the measurements on the mean and standard deviation for each measurement. 
+    Uses descriptive activity names to name the activities in the data set
+    Appropriately labels the data set with descriptive variable names. 
+    Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
+
+
 #0. reading the dataset
 
 #read names of the features (features.txt)
