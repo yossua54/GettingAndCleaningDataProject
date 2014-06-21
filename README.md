@@ -107,7 +107,7 @@ An accumulative procedure is follow over the namesTidy auxiliary variable:
 * The average is calculated of each  variable for each activity and each subject by applying colMeans for each data frame of the pieces list
 > tidy_meanstd_averageBySubjectAndActivity <- data.frame(t(sapply(pieces,colMeans)))
 
-* Finally, the tidy datasetis written.
+* Finally, the tidy dataset is written inf the file "tidy_meanstd_averageBySubjectAndActivity.txt"
 > write.table(tidy_meanstd_averageBySubjectAndActivity,file="tidy_meanstd_averageBySubjectAndActivity.txt",row.names = FALSE,col.names = TRUE)
 
 * Additionally, the variable names and observation names are saved in files to write the Code Book
