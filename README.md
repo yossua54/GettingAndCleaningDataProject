@@ -62,14 +62,15 @@ Next, a detailed explanation of the actions is reported:
 > tidydata_meanstd <- tidydata_all[,iimeanstd]
 > head(tidydata_meanstd)
 
-###3. Uses descriptive activity names to name the activities in the data set
+### 3. Uses descriptive activity names to name the activities in the data set
 
 * Activity labels from the activity_labels.txt are used to rename the values of the activity column
+
 > activitylabelsdf <- read.table("./UCI HAR Dataset/activity_labels.txt",  header=FALSE)
 > activity_labels <- activitylabelsdf[,2] 
-< tidydata_all[,563] <- activity_labels[tidydata_all[,563]] 
+> tidydata_all[,563] <- activity_labels[tidydata_all[,563]] 
 
-###4. Appropriately labels the data set with descriptive variable names. 
+### 4. Appropriately labels the data set with descriptive variable names. 
 
 An accumulative procedure is follow over the namesTidy auxiliary variable:
 
@@ -91,7 +92,7 @@ An accumulative procedure is follow over the namesTidy auxiliary variable:
 * The feature names of the tidydata_meanstd dataframe is substituted by the auxilary variable with the corrected names
 > names(tidydata_meanstd) <- namesTidy
 
-###5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
+### 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
 
 * An index of subject x activity (30 x 6 levels) is created for the 10299 observations
 > index <- list(tidydata_all[,"subject"],tidydata_all[,"activity"])
