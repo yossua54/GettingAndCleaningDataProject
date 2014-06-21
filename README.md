@@ -55,6 +55,7 @@ Next, a detailed explanation of the actions is reported:
 > istd <- grep("std()",names(tidydata_all),fixed=TRUE)
 
 * After merging and ordering the indexes, a new tidydata_meanstd dataframe is created with only mean and std measurements.
+
   imeanstd <- c(imean,istd)
   iimeanstd <- imeanstd[order(imeanstd)]
   features_meanstd <- names(tidydata_all)[iimeanstd]
