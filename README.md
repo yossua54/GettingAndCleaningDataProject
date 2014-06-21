@@ -1,7 +1,7 @@
 GettingAndCleaningDataProject
 =============================
 
-Solution to the couse project by Juan M Garcia-Gomez (email: yossua54@gmail.com)
+Solution to the Getting and Cleaning Data Course Project
 
 ## Author: Juan M Garcia-Gomez (yossua54@gmail.com)
 
@@ -28,7 +28,7 @@ The [run_analysis.R](https://github.com/yossua54/GettingAndCleaningDataProject/b
 * 4. Appropriately labels the data set with descriptive variable names. 
 * 5. Creates an independent tidy data set with the average of each variable for each activity and each subject. 
 
-Next, you can see a detailed explanation of the actions:
+Next, a detailed explanation of the actions is reported:
 
 ### 0. Reads the dataset, feature names and subjects ids.
 
@@ -37,15 +37,14 @@ Next, you can see a detailed explanation of the actions:
 
 ### 1. Merges the training and the test sets to create one data set.
 
-#merging training files
-training <- cbind(subject_train,X_train,y_train)
-#merging training files
-test <- cbind(subject_test,X_test,y_test)
-#merging training and test dataframes
-tidydata_all <- rbind(training,test)
-head(tidydata_all)
-tail(tidydata_all)
-#write.table(tidydata_all,file="tidydata_all.txt")
+* A training data frame is prepared merging columns with cbind from subject_train,X_train,y_train.
+> training <- cbind(subject_train,X_train,y_train)
+
+* A test data frame is prepared merging columns with cbind from subject_train,X_train,y_train.
+> test <- cbind(subject_test,X_test,y_test)
+
+* The trainig and test data frames are merged by rows to generate the tidydata_all dataframe.
+> tidydata_all <- rbind(training,test)
 
 #2. Extracts only the measurements on the mean and standard deviation for each measurement. 
 
