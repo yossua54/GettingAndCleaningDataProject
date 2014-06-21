@@ -148,6 +148,27 @@ hr {
 
 <h2>Author: Juan M Garcia-Gomez (<a href="mailto:yossua54@gmail.com">yossua54@gmail.com</a>)</h2>
 
+<h1>Objective</h1>
+
+<p>The objective of this project is to provide generate a tidy dataset with summarized data collected from the accelerometers from the Samsung Galaxy S smartphone.</p>
+
+<h1>Materials</h1>
+
+<p>The data processed in this project is the &ldquo;Human Activity Recognition Using Smartphones Data Set &rdquo; downloaded from this <a href="https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip">URL</a>.</p>
+
+<h1>Methods</h1>
+
+<p>The solution was implemented in the R language, using the Rstudio 0.98.490. All the code is including in the single R script <a href="https://github.com/yossua54/GettingAndCleaningDataProject/blob/master/run_analysis.R">run_analysis.R</a>.</p>
+
+<p>You should create one R script called run_analysis.R that does the following. </p>
+
+<pre><code>Merges the training and the test sets to create one data set.
+Extracts only the measurements on the mean and standard deviation for each measurement. 
+Uses descriptive activity names to name the activities in the data set
+Appropriately labels the data set with descriptive variable names. 
+Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
+</code></pre>
+
 <p>#0. reading the dataset</p>
 
 <p>#read names of the features (features.txt)
@@ -212,14 +233,18 @@ names(tidydata_meanstd) &lt;- namesTidy</p>
 
 <p>#5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject. </p>
 
-<p>#an index of subject x activity (30 x 6 levels) is created for the 10299 observations</p>
-
-<p>#the tidydata_meanstd data frame is splitted in the 180 levels</p>
-
-<p>#the average is calculated of each  variable for each activity and each subject by applying colMeans for each data frame of the pieces list</p>
+<p>#an index of subject x activity (30 x 6 levels) is created for the 10299 observations
+index &lt;- list(tidydata_all[,&ldquo;subject&rdquo;],tidydata_all[,&ldquo;activity&rdquo;])
+#the tidydata_meanstd data frame is splitted in the 180 levels
+pieces &lt;- split(tidydata_meanstd,index)
+#the average is calculated of each  variable for each activity and each subject by applying colMeans for each data frame of the pieces list
+tidy_meanstd_averageBySubjectAndActivity &lt;- data.frame(t(sapply(pieces,colMeans)))</p>
 
 <p>#the tidy dataset is written
-#the variable names and observation names are also saved in files to write the Code Book</p>
+write.table(tidy_meanstd_averageBySubjectAndActivity,file=&ldquo;tidy_meanstd_averageBySubjectAndActivity.txt&rdquo;,row.names = FALSE,col.names = TRUE)
+#the variable names and observation names are also saved in files to write the Code Book
+write.table(names(tidy_meanstd_averageBySubjectAndActivity),file=&ldquo;tidy_meanstd_averageBySubjectAndActivity_features.txt&rdquo;,col.names = FALSE)
+write.table(rownames(tidy_meanstd_averageBySubjectAndActivity),file=&ldquo;tidy_meanstd_averageBySubjectAndActivity_observations.txt&rdquo;,col.names = FALSE)</p>
 
 </body>
 

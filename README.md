@@ -11,40 +11,31 @@ The objective of this project is to provide generate a tidy dataset with summari
 
 # Materials
 
-The data processed in this project is the "Human Activity Recognition Using Smartphones Data Set " downloaded from this [https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip] URL
+The data processed in this project is the "Human Activity Recognition Using Smartphones Data Set " downloaded from this [URL](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip).
 
-# Methids
+# Methods
 
- You should create one R script called run_analysis.R that does the following. 
+The solution was implemented in the R language, using the Rstudio 0.98.490. All the code is including in the single R script [run_analysis.R](https://github.com/yossua54/GettingAndCleaningDataProject/blob/master/run_analysis.R).
 
-    Merges the training and the test sets to create one data set.
-    Extracts only the measurements on the mean and standard deviation for each measurement. 
-    Uses descriptive activity names to name the activities in the data set
-    Appropriately labels the data set with descriptive variable names. 
-    Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
+# Solution
 
+The [run_analysis.R](https://github.com/yossua54/GettingAndCleaningDataProject/blob/master/run_analysis.R) execute the next ordered actions:
 
-#0. reading the dataset
+* 0. Reads the dataset, feature names and subjects ids.
+* 1. Merges the training and the test sets to create one data set.
+* 2. Extracts only the measurements on the mean and standard deviation for each measurement. 
+* 3. Uses descriptive activity names to name the activities in the data set
+* 4. Appropriately labels the data set with descriptive variable names. 
+* 5. Creates an independent tidy data set with the average of each variable for each activity and each subject. 
 
-#read names of the features (features.txt)
-featuresdf <- read.table("./UCI HAR Dataset/features.txt",  header=FALSE) #similar a read.csv(), usar quote=""
-featuresX <- featuresdf[,2] 
+Next, you can see a detailed explanation of the actions:
 
-# read input data files
-X_train <- read.table("./UCI HAR Dataset/train/X_train.txt",  header=FALSE) #similar a read.csv(), usar quote=""
-names(X_train) <- featuresX
-y_train <- read.table("./UCI HAR Dataset/train/y_train.txt", header=FALSE) #similar a read.csv(), usar quote=""
-names(y_train) <- "activity"
-subject_train <- read.table("./UCI HAR Dataset/train/subject_train.txt",  header=FALSE) #similar a read.csv(), usar quote=""
-names(subject_train) <- "subject"
-X_test <- read.table("./UCI HAR Dataset/test/X_test.txt",  header=FALSE) #similar a read.csv(), usar quote=""
-names(X_test) <- featuresX
-y_test <- read.table("./UCI HAR Dataset/test/y_test.txt",  header=FALSE) #similar a read.csv(), usar quote=""
-names(y_test) <- "activity"
-subject_test <- read.table("./UCI HAR Dataset/test/subject_test.txt", header=FALSE) #similar a read.csv(), usar quote=""
-names(subject_test) <- "subject"
+### 0. Reads the dataset, feature names and subjects ids.
 
-# 1. Merges the training and the test sets to create one data set.
+* Reads and prepares names of the features from [features.txt](https://github.com/yossua54/GettingAndCleaningDataProject/blob/master/UCI%20HAR%20Dataset/features.txt).
+* Reads the input data files and prepare the X_train, y_train, subject_train, X_test, y_test,  and subject_test data frames.
+
+### 1. Merges the training and the test sets to create one data set.
 
 #merging training files
 training <- cbind(subject_train,X_train,y_train)
